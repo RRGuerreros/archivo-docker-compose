@@ -18,7 +18,7 @@ services:
       - mongo_data:/data/db
 
   msvc-webflux-producto:
-    image: msvc-webflux-producto:latest
+    image: msvc-webflux-producto:1.0
     container_name: c-msvc-webflux-producto
     restart: unless-stopped
     build:
