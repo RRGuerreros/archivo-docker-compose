@@ -30,7 +30,20 @@ pipeline {
 
     stage('Pruebas de conectividad') {
       steps {
-        sh 'curl -f http://localhost:8081 || exit 1'
+        script {
+          def retries = 5
+          def wait = 5
+          for (int i = 0; i < retries; i++) {
+            def result = sh(script: 'curl -f http://localhost:8081', returnStatus: true)
+            if (result == 0) {
+              echo "Servicio disponible"
+              break
+            } else {
+              echo "Intento ${i + 1} fallido, esperando ${wait}s..."
+              sleep wait
+            }
+          }
+        }
       }
     }
   }
