@@ -1,5 +1,3 @@
-version: '3.8'
-
 networks:
   red-webflux:
     driver: bridge
@@ -17,7 +15,7 @@ services:
     networks:
       - red-webflux
     volumes:
-      - D:/Cursos/Docker/mongodb:/data/db
+      - mongo_data:/data/db
 
   msvc-webflux-producto:
     image: msvc-webflux-producto:latest
@@ -34,3 +32,5 @@ services:
       - red-webflux
     depends_on:
       - mongoDB
+volumes:
+  mongo_data:
