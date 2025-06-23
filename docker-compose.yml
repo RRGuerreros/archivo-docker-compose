@@ -18,7 +18,7 @@ services:
       - mongo_data:/data/db
 
   msvc-webflux-producto:
-    image: msvc-webflux-producto:1.0
+    image: tapion123/msvc-webflux-producto:1.0
     container_name: c-msvc-webflux-producto
     restart: unless-stopped
     ports:
