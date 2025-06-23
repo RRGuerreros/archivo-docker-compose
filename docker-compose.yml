@@ -1,0 +1,36 @@
+version: '3.8'
+
+networks:
+  red-webflux:
+    driver: bridge
+
+services:
+  mongoDB:
+    image: mongo:latest
+    container_name: mongoDB
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root123
+    networks:
+      - red-webflux
+    volumes:
+      - D:/Cursos/Docker/mongodb:/data/db
+
+  msvc-webflux-producto:
+    image: msvc-webflux-producto:latest
+    container_name: c-msvc-webflux-producto
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    environment:
+      - MONGODB_URI=mongodb://root:root123@mongoDB:27017/db_msvc_webflux_producto?authSource=admin
+    networks:
+      - red-webflux
+    depends_on:
+      - mongoDB
