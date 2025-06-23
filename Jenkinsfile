@@ -8,6 +8,12 @@ pipeline {
         echo 'Repositorio clonado'
       }
     }
+    
+    stage('Descargar imágenes') {
+      steps {
+        sh 'docker-compose pull'
+      }
+    }
 
     stage('Levantar contenedores con Docker Compose') {
       steps {
