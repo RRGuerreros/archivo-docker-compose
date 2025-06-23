@@ -34,7 +34,7 @@ pipeline {
           def retries = 5
           def wait = 10
           for (int i = 0; i < retries; i++) {
-            def result = sh(script: 'curl -f http://localhost:8081', returnStatus: true)
+            def result = sh(script: 'curl -f http://localhost:8081/productos', returnStatus: true)
             if (result == 0) {
               echo "Servicio disponible"
               break
